@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Countdown</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 100px; }
+    #timer { font-size: 3em; color: #333; }
+  </style>
+</head>
+<body>
+  <h1>Siete Pronti?</h1>
+  <div id="timer"></div>
+
+  <script>
+    const targetDate = new Date("2025-07-07T23:59:59").getTime(); // <-- Cambia data qui
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("timer").innerHTML = "È arrivato il giorno!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>
